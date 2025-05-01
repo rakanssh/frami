@@ -1,0 +1,30 @@
+{
+  "name": "frami",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "NODE_ENV=development electron src/main.js",
+    "start": "electron src/main.js",
+    "build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "A frameless browser designed for broadcasting software integration",
+  "devDependencies": {
+    "electron": "^36.0.1",
+    "electron-builder": "^26.0.12",
+    "electron-reloader": "^1.2.3"
+  },
+  "build": {
+    "appId": "com.frami.app",
+    "productName": "Frami",
+    "copyright": "Copyright © 2023 ${author}",
+    "files": [
+      "**/*",
+      "!node_modules",
+      "!dist"
+    ]
+  }
+}
