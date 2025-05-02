@@ -6,7 +6,7 @@ const { globalShortcut } = require("electron");
  */
 function registerShortcuts(win) {
   globalShortcut.register("CommandOrControl+Shift+I", () => {
-    win.webContents.toggleDevTools();
+    win.webContents.toggleDevTools({ mode: "detach" });
   });
 
   globalShortcut.register("CommandOrControl+R", () => {
