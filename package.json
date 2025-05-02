@@ -1,6 +1,6 @@
 {
   "name": "frami",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -8,9 +8,14 @@
     "start": "electron src/main.js",
     "build": "electron-builder"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "electron",
+    "browser",
+    "frameless",
+    "broadcasting"
+  ],
+  "author": "Rakan Al-Shammari",
+  "license": "MIT",
   "description": "A frameless browser designed for broadcasting software integration",
   "devDependencies": {
     "electron": "^36.0.1",
@@ -20,11 +25,23 @@
   "build": {
     "appId": "com.frami.app",
     "productName": "Frami",
-    "copyright": "Copyright © 2023 ${author}",
+    "copyright": "Copyright © 2025 ${author}",
     "files": [
       "**/*",
       "!node_modules",
       "!dist"
-    ]
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "src/assets/icons/icon.icns",
+      "darkModeSupport": true
+    },
+    "win": {
+      "icon": "src/assets/icons/icon.ico"
+    },
+    "linux": {
+      "icon": "src/assets/icons/icons",
+      "category": "Utility"
+    }
   }
 }
