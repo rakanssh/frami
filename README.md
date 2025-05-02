@@ -4,7 +4,9 @@ A simple, clean Electron-based browser application designed for broadcasting sof
 Features a content-only window ready for capture, and a set of keyboard shortcuts to control it.
 Navigation and resizing uses the value currently in clipboard.
 
-## Keyboard Shortcuts
+## Usage
+
+### Keyboard Shortcuts
 
 | Shortcut         | Description                      |
 | ---------------- | -------------------------------- |
@@ -19,21 +21,31 @@ Navigation and resizing uses the value currently in clipboard.
 | `⌘/Ctrl+Shift+W` | Set window width from clipboard  |
 | `⌘/Ctrl+Shift+H` | Set window height from clipboard |
 
-## Project Structure
+## Installation
 
-```
-project-root/
-├── src/
-│   ├── main.js           # Application entry point
-│   ├── windows/          # Window management
-│   │   └── mainWindow.js
-│   ├── shortcuts/        # Keyboard shortcuts
-│   │   └── keyboard.js
-│   └── config/           # Configuration files
-│       └── urls.js
-├── package.json
-└── README.md
-```
+- [Node.js](https://nodejs.org/) v22
+- npm
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/username/frami.git
+   cd frami
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Build the application:
+
+   ```bash
+   npm run build
+   ```
+
+4. Find the built files for your platform in /dist
 
 ## Development
 
@@ -43,14 +55,8 @@ project-root/
 npm install
 ```
 
-### Run
+## Run
 
 ```bash
 npm start
-```
-
-### Build
-
-```bash
-npm run build
 ```
