@@ -11,26 +11,26 @@ function registerShortcuts(win) {
   });
 
   // Reload the page
-  globalShortcut.register("CommandOrControl+R", () => {
+  globalShortcut.register("CommandOrControl+Shift+R", () => {
     win.webContents.reload();
   });
 
   // Go back
-  globalShortcut.register("CommandOrControl+[", () => {
+  globalShortcut.register("CommandOrControl+Shift+[", () => {
     if (win.webContents.canGoBack()) {
       win.webContents.goBack();
     }
   });
 
   // Go forward
-  globalShortcut.register("CommandOrControl+]", () => {
+  globalShortcut.register("CommandOrControl+Shift+]", () => {
     if (win.webContents.canGoForward()) {
       win.webContents.goForward();
     }
   });
 
   // Navigate to URL from clipboard
-  globalShortcut.register("CommandOrControl+L", () => {
+  globalShortcut.register("CommandOrControl+Shift+L", () => {
     const clipboardText = clipboard.readText().trim();
     const urlPattern =
       /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;

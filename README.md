@@ -2,6 +2,16 @@
 
 A simple, clean Electron-based browser application designed for broadcasting software integration. Features a frameless window locked to its launch resolution.
 
+## Keyboard Shortcuts
+
+| Shortcut         | Description                    |
+| ---------------- | ------------------------------ |
+| `⌘/Ctrl+Shift+I` | Toggle Developer Tools         |
+| `⌘/Ctrl+Shift+R` | Reload the page                |
+| `⌘/Ctrl+Shift+[` | Go back in history             |
+| `⌘/Ctrl+Shift+]` | Go forward in history          |
+| `⌘/Ctrl+Shift+L` | Navigate to URL from clipboard |
+
 ## Project Structure
 
 ```
