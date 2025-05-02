@@ -2,19 +2,6 @@ const { app, BrowserWindow } = require("electron");
 const { createMainWindow } = require("./windows/mainWindow");
 const { registerShortcuts } = require("./shortcuts/keyboard");
 
-// Enable hot reloading in development mode
-if (process.env.NODE_ENV === "development") {
-  try {
-    require("electron-reloader")(module, {
-      watchRenderer: true,
-      ignore: [/node_modules|[\/\\]\./],
-    });
-    console.log("Hot reloading enabled");
-  } catch (err) {
-    console.error("Error enabling hot reload:", err);
-  }
-}
-
 let mainWindow;
 
 function initApp() {
