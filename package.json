@@ -29,7 +29,6 @@
     "copyright": "Copyright © 2025 ${author}",
     "files": [
       "**/*",
-      "!node_modules",
       "!dist"
     ],
     "mac": {
