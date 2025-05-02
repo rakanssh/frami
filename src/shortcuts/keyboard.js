@@ -7,7 +7,10 @@ const { globalShortcut, clipboard } = require("electron");
 function registerShortcuts(win) {
   // Toggle dev tools
   globalShortcut.register("CommandOrControl+Shift+I", () => {
-    win.webContents.toggleDevTools({ mode: "detach" });
+    win.webContents.toggleDevTools({
+      mode: "detach",
+      defaultInspectedElement: "console",
+    });
   });
 
   // Reload the page
@@ -17,15 +20,15 @@ function registerShortcuts(win) {
 
   // Go back
   globalShortcut.register("CommandOrControl+Shift+[", () => {
-    if (win.webContents.canGoBack()) {
-      win.webContents.goBack();
+    if (win.webContents.navigationHistory.canGoBack()) {
+      win.webContents.navigationHistory.goBack();
     }
   });
 
   // Go forward
   globalShortcut.register("CommandOrControl+Shift+]", () => {
-    if (win.webContents.canGoForward()) {
-      win.webContents.goForward();
+    if (win.webContents.navigationHistory.canGoForward()) {
+      win.webContents.navigationHistory.goForward();
     }
   });
 
