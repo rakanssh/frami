@@ -3,7 +3,7 @@ const { createMainWindow } = require("./windows/mainWindow");
 const { registerShortcuts } = require("./shortcuts/keyboard");
 
 // Enable hot reloading in development mode
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   try {
     require("electron-reloader")(module, {
       watchRenderer: true,

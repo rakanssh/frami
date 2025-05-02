@@ -34,15 +34,12 @@ function registerShortcuts(win) {
     const clipboardText = clipboard.readText().trim();
     const urlPattern =
       /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
-    console.log(`clipboardText: ${clipboardText}`);
     if (urlPattern.test(clipboardText)) {
       // Ensure the URL has http:// or https:// prefix
       const url = clipboardText.startsWith("http")
         ? clipboardText
         : `https://${clipboardText}`;
       win.webContents.loadURL(url);
-    } else {
-      console.log("Invalid URL");
     }
   });
 }
