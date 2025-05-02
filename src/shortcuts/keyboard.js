@@ -1,4 +1,5 @@
-const { globalShortcut, clipboard } = require("electron");
+const { clipboard } = require("electron");
+const localShortcut = require("electron-localshortcut");
 
 /**
  * Register global keyboard shortcuts
@@ -6,7 +7,7 @@ const { globalShortcut, clipboard } = require("electron");
  */
 function registerShortcuts(win) {
   // Toggle dev tools
-  globalShortcut.register("CommandOrControl+Shift+I", () => {
+  localShortcut.register(win, "CommandOrControl+Shift+I", () => {
     win.webContents.toggleDevTools({
       mode: "detach",
       defaultInspectedElement: "console",
@@ -14,26 +15,41 @@ function registerShortcuts(win) {
   });
 
   // Reload the page
-  globalShortcut.register("CommandOrControl+Shift+R", () => {
+  localShortcut.register(win, "CommandOrControl+R", () => {
     win.webContents.reload();
   });
 
   // Go back
-  globalShortcut.register("CommandOrControl+Shift+[", () => {
+  localShortcut.register(win, "CommandOrControl+[", () => {
     if (win.webContents.navigationHistory.canGoBack()) {
       win.webContents.navigationHistory.goBack();
     }
   });
 
   // Go forward
-  globalShortcut.register("CommandOrControl+Shift+]", () => {
+  localShortcut.register(win, "CommandOrControl+]", () => {
     if (win.webContents.navigationHistory.canGoForward()) {
       win.webContents.navigationHistory.goForward();
     }
   });
 
+  // Zoom in
+  localShortcut.register(win, "CommandOrControl+=", () => {
+    win.webContents.zoomFactor += 0.1;
+  });
+
+  // Zoom out
+  localShortcut.register(win, "CommandOrControl+-", () => {
+    win.webContents.zoomFactor -= 0.1;
+  });
+
+  // Reset zoom
+  localShortcut.register(win, "CommandOrControl+0", () => {
+    win.webContents.zoomFactor = 1;
+  });
+
   // Navigate to URL from clipboard
-  globalShortcut.register("CommandOrControl+Shift+L", () => {
+  localShortcut.register(win, "CommandOrControl+L", () => {
     const clipboardText = clipboard.readText().trim();
     const urlPattern =
       /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
@@ -43,6 +59,26 @@ function registerShortcuts(win) {
         ? clipboardText
         : `https://${clipboardText}`;
       win.webContents.loadURL(url);
+    }
+  });
+
+  // Set window width from clipboard
+  localShortcut.register(win, "CommandOrControl+Shift+W", () => {
+    const clipboardText = clipboard.readText().trim();
+    const width = parseInt(clipboardText, 10);
+    if (!isNaN(width) && width > 0) {
+      const [, height] = win.getSize();
+      win.setSize(width, height);
+    }
+  });
+
+  // Set window height from clipboard
+  localShortcut.register(win, "CommandOrControl+Shift+H", () => {
+    const clipboardText = clipboard.readText().trim();
+    const height = parseInt(clipboardText, 10);
+    if (!isNaN(height) && height > 0) {
+      const [width] = win.getSize();
+      win.setSize(width, height);
     }
   });
 }

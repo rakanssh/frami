@@ -43,5 +43,8 @@
       "icon": "src/assets/icons/icons",
       "category": "Utility"
     }
+  },
+  "dependencies": {
+    "electron-localshortcut": "^3.2.1"
   }
 }
