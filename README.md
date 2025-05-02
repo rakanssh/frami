@@ -37,7 +37,7 @@ Navigation and resizing uses the value currently in clipboard.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/username/frami.git
+   git clone https://github.com/rakanssh/frami.git
    cd frami
    ```
 
