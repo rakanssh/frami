@@ -51,14 +51,24 @@ function registerShortcuts(win) {
   // Navigate to URL from clipboard
   localShortcut.register(win, "CommandOrControl+L", () => {
     const clipboardText = clipboard.readText().trim();
-    const urlPattern =
-      /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
-    if (urlPattern.test(clipboardText)) {
-      // Ensure the URL has http:// or https:// prefix
-      const url = clipboardText.startsWith("http")
-        ? clipboardText
-        : `https://${clipboardText}`;
-      win.webContents.loadURL(url);
+
+    let urlToCheck = clipboardText;
+    try {
+      // If no protocol is specified, try with https://
+      if (
+        !urlToCheck.startsWith("http://") &&
+        !urlToCheck.startsWith("https://")
+      ) {
+        urlToCheck = "https://" + urlToCheck;
+      }
+
+      new URL(urlToCheck);
+
+      win.webContents.loadURL(urlToCheck);
+    } catch (e) {
+      win.webContents.executeJavaScript(
+        `console.log("Invalid URL from clipboard: ${urlToCheck}")`
+      );
     }
   });
 
