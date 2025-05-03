@@ -1,4 +1,4 @@
-const { BrowserWindow } = require("electron");
+const { BrowserWindow, Menu, MenuItem } = require("electron");
 const { googleUrl } = require("../config/urls");
 const path = require("path");
 
@@ -28,6 +28,79 @@ function createMainWindow() {
 
   // Load the default page
   win.loadURL(googleUrl);
+
+  // Prevent new window creation
+  win.webContents.setWindowOpenHandler(({ url }) => {
+    win.loadURL(url);
+    return { action: "deny" };
+  });
+
+  // Set up context menu
+  win.webContents.on("context-menu", (event, params) => {
+    const menu = new Menu();
+
+    if (params.linkURL) {
+      menu.append(
+        new MenuItem({
+          label: "Open Link in New Window",
+          click: () => {
+            win.webContents.loadURL(params.linkURL);
+          },
+        })
+      );
+      menu.append(
+        new MenuItem({
+          label: "Copy Link Address",
+          click: () => {
+            require("electron").clipboard.writeText(params.linkURL);
+          },
+        })
+      );
+      menu.append(new MenuItem({ type: "separator" }));
+    }
+
+    if (params.selectionText) {
+      menu.append(new MenuItem({ label: "Copy", role: "copy" }));
+      menu.append(new MenuItem({ label: "Cut", role: "cut" }));
+      menu.append(new MenuItem({ type: "separator" }));
+    }
+
+    if (params.isEditable) {
+      menu.append(new MenuItem({ label: "Paste", role: "paste" }));
+      menu.append(new MenuItem({ type: "separator" }));
+    }
+
+    menu.append(
+      new MenuItem({
+        label: "Back",
+        click: () => {
+          if (win.webContents.navigationHistory.canGoBack()) {
+            win.webContents.navigationHistory.goBack();
+          }
+        },
+      })
+    );
+    menu.append(
+      new MenuItem({
+        label: "Forward",
+        click: () => {
+          if (win.webContents.navigationHistory.canGoForward()) {
+            win.webContents.navigationHistory.goForward();
+          }
+        },
+      })
+    );
+    menu.append(
+      new MenuItem({
+        label: "Reload",
+        click: () => {
+          win.webContents.reload();
+        },
+      })
+    );
+
+    menu.popup();
+  });
 
   return win;
 }
