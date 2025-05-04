@@ -25,7 +25,7 @@ Navigation and resizing uses the value currently in clipboard.
 
 #### From Release
 
-1. Download the latest release for your platform from the [releases page](https://github.com/username/frami/releases)
+1. Download the latest release for your platform from the [releases page](https://github.com/rakanssh/frami/releases)
 2. Extract the archive (if applicable)
 3. Run/Install the application
 
