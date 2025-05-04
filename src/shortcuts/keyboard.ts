@@ -1,17 +1,15 @@
-const { clipboard } = require("electron");
-const localShortcut = require("electron-localshortcut");
+import { clipboard, BrowserWindow } from "electron";
+// @ts-ignore
+import localShortcut from "electron-localshortcut";
 
 /**
  * Register global keyboard shortcuts
- * @param {BrowserWindow} win - The browser window to apply shortcuts to
+ * @param win - The browser window to apply shortcuts to
  */
-function registerShortcuts(win) {
+export function registerShortcuts(win: BrowserWindow) {
   // Toggle dev tools
   localShortcut.register(win, "CommandOrControl+Shift+I", () => {
-    win.webContents.toggleDevTools({
-      mode: "detach",
-      defaultInspectedElement: "console",
-    });
+    win.webContents.toggleDevTools();
   });
 
   // Reload the page
@@ -92,7 +90,3 @@ function registerShortcuts(win) {
     }
   });
 }
-
-module.exports = {
-  registerShortcuts,
-};
