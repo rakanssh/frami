@@ -1,11 +1,11 @@
-const { BrowserWindow, Menu, MenuItem } = require("electron");
-const { googleUrl } = require("../config/urls");
-const path = require("path");
+import { BrowserWindow, Menu, MenuItem, clipboard } from "electron";
+import { googleUrl } from "../config/urls";
+import path from "path";
 
 /**
  * Creates and returns the main application window
  */
-function createMainWindow() {
+export function createMainWindow(): BrowserWindow {
   const win = new BrowserWindow({
     width: 1920,
     height: 1080,
@@ -52,7 +52,7 @@ function createMainWindow() {
         new MenuItem({
           label: "Copy Link Address",
           click: () => {
-            require("electron").clipboard.writeText(params.linkURL);
+            clipboard.writeText(params.linkURL);
           },
         })
       );
@@ -74,8 +74,8 @@ function createMainWindow() {
       new MenuItem({
         label: "Back",
         click: () => {
-          if (win.webContents.navigationHistory.canGoBack()) {
-            win.webContents.navigationHistory.goBack();
+          if (win.webContents.canGoBack()) {
+            win.webContents.goBack();
           }
         },
       })
@@ -84,8 +84,8 @@ function createMainWindow() {
       new MenuItem({
         label: "Forward",
         click: () => {
-          if (win.webContents.navigationHistory.canGoForward()) {
-            win.webContents.navigationHistory.goForward();
+          if (win.webContents.canGoForward()) {
+            win.webContents.goForward();
           }
         },
       })
@@ -104,7 +104,3 @@ function createMainWindow() {
 
   return win;
 }
-
-module.exports = {
-  createMainWindow,
-};

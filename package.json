@@ -1,13 +1,14 @@
 {
   "name": "frami",
-  "version": "0.2.0",
-  "main": "src/main.js",
+  "version": "0.2.1",
+  "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "NODE_ENV=development electron src/main.js",
-    "start": "electron src/main.js",
-    "build": "electron-builder",
-    "build:clean": "rm -rf dist && rm -rf build && npm run build"
+    "build:ts": "tsc",
+    "start:dev": "NODE_ENV=development electron dist/main.js",
+    "start": "electron dist/main.js",
+    "build": "npm run build:ts && electron-builder",
+    "build:clean": "rm -rf dist && rm -rf build && npm run build:ts && npm run build"
   },
   "keywords": [
     "electron",
@@ -19,16 +20,22 @@
   "license": "MIT",
   "description": "A frameless browser designed for broadcasting software integration",
   "devDependencies": {
+    "@types/electron": "^1.4.38",
+    "@types/node": "^22.15.3",
     "electron": "^36.0.1",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.0.12",
+    "typescript": "^5.8.3"
   },
   "build": {
     "appId": "com.frami.app",
     "productName": "Frami",
     "copyright": "Copyright © 2025 ${author}",
     "files": [
-      "**/*",
-      "!dist"
+      "dist/**/*",
+      "!dist/mac-arm64",
+      "!dist/_unpacked",
+      "!dist/builder-debug.yml",
+      "!dist/builder-effective-config.yaml"
     ],
     "mac": {
       "category": "public.app-category.utilities",

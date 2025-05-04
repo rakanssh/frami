@@ -1,8 +1,8 @@
-const { app, BrowserWindow } = require("electron");
-const { createMainWindow } = require("./windows/mainWindow");
-const { registerShortcuts } = require("./shortcuts/keyboard");
+import { app, BrowserWindow } from "electron";
+import { createMainWindow } from "./windows/mainWindow";
+import { registerShortcuts } from "./shortcuts/keyboard";
 
-let mainWindow;
+let mainWindow: BrowserWindow;
 
 function initApp() {
   mainWindow = createMainWindow();
